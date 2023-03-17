@@ -1,0 +1,97 @@
+@import url("https://fonts.cdnfonts.com/css/gilroy-bold");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+font-family: 'Gilroy-Bold', sans-serif;
+font-family: 'Gilroy-Heavy', sans-serif;
+font-family: 'Gilroy-Light', sans-serif;
+font-family: 'Gilroy-Medium', sans-serif;
+font-family: 'Gilroy-Regular', sans-serif;  */
+
+:root {
+  --colorText: #565773;
+  --primaryColor: #f5f3f3;
+  --secondaryColor: #6442ff;
+  --lightPurple: #efebfe;
+  --whiteText: #ffffff;
+  --lightGray: rgba(86, 87, 115, 0.35);
+  --inputColor: rgba(194, 196, 255, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: "Gilroy-Regular", sans-serif;
+  color: #565773;
+}
+
+body {
+  min-width: 100vw;
+  overflow-x: hidden;
+  background: var(--primaryColor);
+}
+
+/*GLOBAL FONTS SETTINGS*/
+
+h1 {
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
+/* NAV */
+
+/* Nav span in bold*/
+nav span {
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
+/*Active class for li in nav*/
+
+nav .active {
+  transition: all 0.5s ease;
+  color: var(--secondaryColor);
+}
+
+/* active class for creator nav */
+
+#creatorNav .active {
+  transition: all 0.5s ease;
+  color: var(--secondaryColor);
+  border-bottom: 3px solid var(--secondaryColor);
+}
+
+/* ARTWORK COMPONENTS CSS CLASS*/
+
+button.active {
+  background: var(--secondaryColor);
+  color: var(--whiteText);
+}
+
+.likelihoodeBtn.active {
+  background: var(--secondaryColor);
+}
+.likelihoodRounded.active {
+  background: var(--secondaryColor);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondaryColor);
+
+  border-radius: 14px;
+}
