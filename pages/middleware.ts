@@ -6,14 +6,4 @@ export type Middleware = (
   event: NextFetchEvent
 ) => Promise<Response | undefined> | Response | undefined;
 
-export function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith("/about")) {
-    // This logic is only applied to /about
-  }
-
-  if (request.nextUrl.pathname.startsWith("/dashboard")) {
-    // This logic is only applied to /dashboard
-  }
-
-  console.log("sdsfsdfsdfsdd");
-}
+export function middleware(request: NextRequest) {}
