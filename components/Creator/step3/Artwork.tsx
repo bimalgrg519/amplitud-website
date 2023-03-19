@@ -1,31 +1,30 @@
-import { useState, FC, useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { FC, useEffect } from "react";
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { traits_type } from "@/mockup/test";
 import Traits from "./Traits";
 import Link from "next/link";
 import StepComponent from "@/components/Creator/compos/StepComponent";
-// import { getFootballersData } from "@/store/actions/testActions";
+import type { IFullTrait } from "@/store/slices/traitSlice";
+import { setTraitState } from "@/store/slices/traitSlice"
 import axios from "axios";
-import Loader from "@/utils/Loader";
 
-interface IProps {}
 
-interface ITraitType {
-  id: number;
-  name: string;
+interface IProps {
+  traits: IFullTrait;
+  setTrait: any;
 }
-
 
 const mapStateToProps = (state) => {
   return {
-    testance: state?.footballers?.footballersData
+    traits: state?.trait?.traitState
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    {},
+    {
+      setTrait: setTraitState
+    },
     dispatch
   );
 };
@@ -34,34 +33,23 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)<FC<IProps>>(({}): any => {
+)<FC<IProps>>(({traits, setTrait}) => {
 
-  const [traitValidate, setTraitValidate] = useState(false);
+  // const traits: IFullTrait = useSelector(selectTraitState);
+  // const dispatch = useDispatch()
 
-  const traits: ITraitType[] = traits_type;
+  const fetchTraits = async () => {
+    await axios.get("http://localhost:3000/api/traits")
+    .then((res) => {
+      setTrait(res.data)
+      // dispatch(setTraitState(res.data));
+    })
+  }
 
-  
-//   const footballersData = useSelector((state: any) => {
-//     return state?.testReducer?.footballersData
-//   });
+  useEffect(() => {
+    fetchTraits()
+  },[])
 
-//   const dispatch = useDispatch();
-
-//   const fetchFootballers = async () => {
-//     // await ApiClient.get("http://localhost:3000/api/hello").then((res) => {
-//     //   console.log('res', res);
-      
-//     //     // dispatch(getFootballersData(res.data))
-//     // })
-//     await axios.get("http://localhost:3000/api/hello")
-//     .then((res) => {
-//         dispatch(getFootballersData(res.data))
-//     })
-//   }
-
-// useEffect(() => {
-//   fetchFootballers()
-// },[])
 
   return (
     <div id="artwork" className="flex flex-col justify-center items-center w-3/4 mt-10 ">
@@ -77,8 +65,8 @@ export default connect(
           </div>
 
           {
-            traits.map((trait) => (
-              <Traits key={trait.id} trait_name={trait.name} />
+            traits && traits?.traits_and_attributes.map((trait, index) => (
+              <Traits key={`trait_${index}`} detail={trait} />
             ))
           }
 

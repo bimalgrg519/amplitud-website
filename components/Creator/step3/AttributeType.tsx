@@ -1,19 +1,23 @@
 
-import avatar from "/src/img/avatar.png";
+import { FC, useState } from "react";
+import { connect } from "react-redux";
 import { singleElementClick } from "@/utils/tools";
-import Image from "next/image";
 import { motion as m } from "framer-motion"
-import { useState } from "react";
+import type { ITraitAttribute } from "@/store/slices/traitSlice";
 
-export default function AttributeType({ name }) {
+interface IProps {
+  attribute: ITraitAttribute;
+}
 
+export default connect(
+  null,
+  null
+)<FC<IProps>>(({attribute}) => {
 
   const [inputValue, setInputValue] = useState("Enter %");
 
-
   //function to check add/delete active class on edge and calculate percent to add it to input
   const getPercents = (e) => {
-    console.log(e.target.id);
     let nb = e.target.id;
     setInputValue(`${nb * 10}%`)
     const element = e.target;
@@ -29,12 +33,11 @@ export default function AttributeType({ name }) {
     }
   }
 
-
   return (
     <m.div layout className="flex w-full py-3 justify-between items-center">
       {/* <Image src={avatar} alt="attribute_image" width={"w-1/12"} height={70} /> */}
       <m.div className="w-20 h-20 bg-lightPurple rounded-xl" />
-      <m.h2 className="font-bold w-3/12 text-center">{name}</m.h2>
+      <m.h2 className="font-bold w-3/12 text-center">{attribute.id}</m.h2>
       <m.div className="w-4/12 flex justify-center items-center">
         <m.div className=" flex items-center h-10 py-2 px-2 rounded-xl border-2 border-lightGray">
           <m.div onClick={getPercents} id="1" className="w-4 h-4 cursor-pointer rounded-full bg-lightGray mx-0.5 likelihoodRounded" />
@@ -62,4 +65,4 @@ export default function AttributeType({ name }) {
 
     </m.div>
   )
-}
+});

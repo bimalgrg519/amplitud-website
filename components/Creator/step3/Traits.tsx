@@ -1,17 +1,19 @@
 
-import { useState } from "react";
-import avatar from "/src/img/avatar.png";
-import Image from "next/image";
-import { singleElementClick } from "@/utils/tools";
+import { useState, FC, useEffect } from "react";
+import { connect } from "react-redux";
 import AttributeType from "./AttributeType";
-import { attribute_type } from "@/mockup/test";
 import { motion as m } from 'framer-motion'
-import { getPercents } from "@/utils/tools";
+import type { ITraitDetail } from "@/store/slices/traitSlice";
 
 
-export default function Traits({ trait_name }) {
+interface IProps {
+  detail: ITraitDetail;
+}
 
-
+export default connect(
+  null,
+  null
+)<FC<IProps>>(({detail}) => {
   //if trait is validate, add check svg
   const [traitValidate, setTraitValidate] = useState(false);
   //value to check click on open button for each trait
@@ -22,7 +24,6 @@ export default function Traits({ trait_name }) {
 
   //function to check add/delete active class on edge and calculate percent to add it to input
   const getPercents = (e) => {
-    console.log(e.target.id);
     let nb = e.target.id;
     setInputValue(`${nb * 10}%`)
     const element = e.target;
@@ -38,8 +39,6 @@ export default function Traits({ trait_name }) {
     }
   }
 
-
-
   return (
     <m.div
       layout
@@ -53,7 +52,7 @@ export default function Traits({ trait_name }) {
             </svg>
           ) : ""}
 
-          <h3 className="text-colorText font-gilroy-bold ">{trait_name}</h3>
+          <h3 className="text-colorText font-gilroy-bold ">{detail.id}</h3>
         </m.div>
         <m.div layout className="flex w-80  p-2 mx-1 border-2 border-inputColor rounded-2xl">
           <m.div onClick={getPercents} id="1" className="w-6 h-6 rounded-md mx-1 bg-lightGrayCube cursor-pointer transition-all duration-200 hover:bg-secondaryColor  likelihoodeBtn"></m.div>
@@ -95,8 +94,8 @@ export default function Traits({ trait_name }) {
 
         <m.div layout className="w-full h-80 flex flex-col overflow-y-scroll">
           {
-            attribute_type.map((attribute) => (
-              <AttributeType key={attribute.id} name={attribute.name} />
+            detail?.attributes.map((attribute, index) => (
+              <AttributeType key={`attribute_${index}`} attribute={attribute} />
             ))
           }
 
@@ -105,4 +104,4 @@ export default function Traits({ trait_name }) {
     </m.div>
   );
 
-}
+});
