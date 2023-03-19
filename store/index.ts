@@ -7,7 +7,7 @@ import {
 import { createWrapper } from "next-redux-wrapper";
 import thunk from "redux-thunk";
 import { loaderSlice } from "./slices/loaderSlice";
-import { traitTypeSlice } from "./slices/traitTypeSlice";
+import { traitSlice } from "./slices/traitSlice";
 
 const enhancer = applyMiddleware(thunk);
 
@@ -15,7 +15,7 @@ const makeStore = () =>
   configureStore({
     reducer: {
       [loaderSlice.name]: loaderSlice.reducer,
-      [traitTypeSlice.name]: traitTypeSlice.reducer,
+      [traitSlice.name]: traitSlice.reducer,
     },
     devTools: true,
     enhancers: [enhancer],
