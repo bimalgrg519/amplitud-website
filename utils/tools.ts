@@ -1,5 +1,4 @@
 export const getPercents = (e: any): void => {
-  console.log(e.target.id);
   let nb = e.target.id;
   const element = e.target;
   const list = element.parentElement;
@@ -15,11 +14,9 @@ export const getPercents = (e: any): void => {
 };
 
 export const liClickToggle = (e): void => {
-  console.log("click", e);
   const li = e.target;
   const ul = li.parentElement;
   const lis = ul.children;
-  console.log(lis.length);
   for (let i = 0; i < lis.length; i++) {
     lis[i].classList.remove("active");
   }

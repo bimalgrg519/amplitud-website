@@ -24,7 +24,6 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.error(error);
     store.dispatch(setLoaderState(false));
     return Promise.reject(error);
   }
