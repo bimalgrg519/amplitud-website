@@ -2,55 +2,55 @@
 
 
 export default function Rule() {
-    
 
-    return(
-        <div className="w-[45%] m-4 h-80 2xl:h-96 border-2 border-lightGray rounded-xl flex flex-col justify-center items-center">
-            
-            <div className="w-full px-8 flex justify-center items-center ">
-                <div className=" mx-4 flex justify-center flex-col">
-                    <div className="flex pl-2 flex-col justify-start items-start pt-5">
-                        <h3 className="text-xs text-lightGray">Eye Color</h3>
-                        <h2 className="text-sm text-colorText">Cyan</h2>
-                    </div>
-                    <div className="my-5">
-                        <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40" />
-                    </div>
-                </div>
-                <div className=" mx-4 flex justify-center flex-col">
-                    <div className="flex pl-2 flex-col justify-start items-start pt-5">
-                        <h3 className="text-xs text-lightGray">Rule type</h3>
-                        <h2 className="text-sm text-colorText">Cannot combine with</h2>
-                    </div>
-                    <div className="my-5 flex ">
-                        <div className=" w-28  h-28  bg-lightPurple rounded-xl  2xl:w-40 2xl:h-40" />
-                        <div className=" w-28  h-28  bg-lightPurple rounded-xl ml-6  2xl:w-40 2xl:h-40" />
-                    </div>
-                </div>
-                <div className=" mx-4 flex justify-center flex-col">
-                    <div className="flex pl-2 flex-col justify-start items-start pt-5">
-                        <h3 className="text-xs text-lightGray">Eye Color</h3>
-                        <h2 className="text-sm text-colorText">High 20, Low-40</h2>
-                    </div>
-                    <div className="my-5">
-                        <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40" />
-                    </div>
-                </div>
 
-            </div>
+  return (
+    <div className="w-[45%] m-4 h-80 2xl:h-96 border-2 border-lightGray rounded-xl flex flex-col justify-center items-center">
 
-            <div className="w-full flex justify-between px-8 my-5">
-                <button className="
+      <div className="w-full px-8 flex justify-center items-center ">
+        <div className=" mx-4 flex justify-center flex-col">
+          <div className="flex pl-2 flex-col justify-start items-start pt-5">
+            <h3 className="text-xs text-lightGray">Eye Color</h3>
+            <h2 className="text-sm text-colorText">Cyan</h2>
+          </div>
+          <div className="my-5">
+            <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40" />
+          </div>
+        </div>
+        <div className=" mx-4 flex justify-center flex-col">
+          <div className="flex pl-2 flex-col justify-start items-start pt-5">
+            <h3 className="text-xs text-lightGray">Rule type</h3>
+            <h2 className="text-sm text-colorText">Cannot combine with</h2>
+          </div>
+          <div className="my-5 flex ">
+            <div className=" w-28  h-28  bg-lightPurple rounded-xl  2xl:w-40 2xl:h-40" />
+            <div className=" w-28  h-28  bg-lightPurple rounded-xl ml-6  2xl:w-40 2xl:h-40" />
+          </div>
+        </div>
+        <div className=" mx-4 flex justify-center flex-col">
+          <div className="flex pl-2 flex-col justify-start items-start pt-5">
+            <h3 className="text-xs text-lightGray">Eye Color</h3>
+            <h2 className="text-sm text-colorText">High 20, Low-40</h2>
+          </div>
+          <div className="my-5">
+            <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40" />
+          </div>
+        </div>
+
+      </div>
+
+      <div className="w-full flex justify-between px-8 my-5">
+        <button className="
                     w-28 p-2 rounded-full text-sm bg-transparent border-2 border-secondaryColor text-colorText
                     transition-all duration-300 ease-in-out hover:bg-secondaryColor hover:text-whiteText
                 ">Edit Rule</button>
-                <button className="
+        <button className="
                     w-28 p-2 rounded-full text-sm bg-secondaryColor text-whiteText border-2 border-secondaryColor
                     transition-all duration-300 ease-in-out hover:bg-transparent hover:text-secondaryColor
                 ">Delete</button>
-            </div>
-        </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 
