@@ -22,7 +22,6 @@ TopBarProgress.config({
 export default (() => {
 
   const isLoader: boolean = useSelector(selectLoaderState);
-  console.log('isLoader', isLoader);
 
   return (
     <>
