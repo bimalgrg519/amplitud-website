@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import { wrapper } from '@/store';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import '@/styles/globals.css';
+import '@/styles/globals.scss';
 import { injectStore } from '@/store/axios'
 
 export default function App({ Component, ...rest }) {
