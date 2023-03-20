@@ -35,16 +35,26 @@ export default connect(
   mapDispatchToProps
 )<FC<IProps>>(({traits, setTrait}) => {
 
-  // const traits: IFullTrait = useSelector(selectTraitState);
-  // const dispatch = useDispatch()
 
   const fetchTraits = async () => {
-    await axios.get("http://localhost:3000/api/traits")
+
+    await axios.get("https://stoplight.io/mocks/amplitud/backend-apis/142319058/creators/collections/get-generative-configuration/33")
     .then((res) => {
-      setTrait(res.data)
-      console.log(res.data);
-      
-      // dispatch(setTraitState(res.data));
+      const traits_and_attributes = Object.entries(res.data.traits_and_attributes).map((e: any) => {
+        const attributes =  Object.entries(e[1].attributes).map((f:any) => {
+          return {
+            id: f[0],
+            ...f[1]
+          }
+        });
+
+        return {
+          ...e[1],
+          attributes: attributes,
+          id: e[0],
+        }
+      });   
+      setTrait({...res.data, traits_and_attributes});
     })
   }
 
