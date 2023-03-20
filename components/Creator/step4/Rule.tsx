@@ -1,17 +1,24 @@
+import type { IRules } from "@/store/slices/traitSlice";
+import { FC } from "react";
+import { connect } from "react-redux";
+interface IProps {
+  rule: IRules;
+}
 
+export default connect(
+  null,
+  null
+)<FC<IProps>>(({ rule }) => {
 
-
-export default function Rule() {
-
-
+  const sentenceType = rule.type === "exclusion" ? "Cannot combine with" : "Combine with"
   return (
     <div className="w-[45%] m-4 h-80 2xl:h-96 border-2 border-lightGray rounded-xl flex flex-col justify-center items-center">
 
       <div className="w-full px-8 flex justify-center items-center ">
         <div className=" mx-4 flex justify-center flex-col">
           <div className="flex pl-2 flex-col justify-start items-start pt-5">
-            <h3 className="text-xs text-lightGray">Eye Color</h3>
-            <h2 className="text-sm text-colorText">Cyan</h2>
+            <h3 className="text-xs text-lightGray">{rule.trait}</h3>
+            <h2 className="text-sm text-colorText">{rule.attribute}</h2>
           </div>
           <div className="my-5">
             <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40" />
@@ -20,7 +27,7 @@ export default function Rule() {
         <div className=" mx-4 flex justify-center flex-col">
           <div className="flex pl-2 flex-col justify-start items-start pt-5">
             <h3 className="text-xs text-lightGray">Rule type</h3>
-            <h2 className="text-sm text-colorText">Cannot combine with</h2>
+            <h2 className="text-sm text-colorText">{sentenceType}</h2>
           </div>
           <div className="my-5 flex ">
             <div className=" w-28  h-28  bg-lightPurple rounded-xl  2xl:w-40 2xl:h-40" />
@@ -29,8 +36,8 @@ export default function Rule() {
         </div>
         <div className=" mx-4 flex justify-center flex-col">
           <div className="flex pl-2 flex-col justify-start items-start pt-5">
-            <h3 className="text-xs text-lightGray">Eye Color</h3>
-            <h2 className="text-sm text-colorText">High 20, Low-40</h2>
+            <h3 className="text-xs text-lightGray">{rule.others.map(e => e.trait).join(' - ')}</h3>
+            <h2 className="text-sm text-colorText">{rule.others.map(e => e.attribute).join(' - ')}</h2>
           </div>
           <div className="my-5">
             <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40" />
@@ -51,7 +58,7 @@ export default function Rule() {
       </div>
     </div>
   )
-}
+});
 
 
 
