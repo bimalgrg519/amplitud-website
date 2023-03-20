@@ -1,18 +1,32 @@
+import { FC } from "react";
+import { connect } from "react-redux";
+import type { IFullTrait } from "@/store/slices/traitSlice";
 import Rule from "./Rule";
 import Link from "next/link";
 
-export default function SavedRules() {
 
+interface IProps {
+  traits: IFullTrait;
+}
+
+const mapStateToProps = (state) => {
+  return {
+    traits: state?.trait?.traitState,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)<FC<IProps>>(({ traits }) => {
   return (
     <div className=" w-full px-2">
       <h1 className="text-2xl"> <span className="text-colorText">85</span> Saved Rules</h1>
       <div className="w-full py-10 flex flex-wrap justify-between items-center">
-        <Rule />
-        <Rule />
-        <Rule />
-        <Rule />
-        <Rule />
-        <Rule />
+
+        {traits?.static_rules.map((rule, index) => {
+          return <Rule key={`rule_${index}`} rule={rule} />
+        })}
       </div>
       <div className="w-full flex justify-between items-center pt-10 px-8">
         <div className=" w-6/12   h-20 flex justify-between items-center 2xl:w-4/12">
@@ -55,7 +69,7 @@ export default function SavedRules() {
       </div>
     </div>
   );
-}
+});
 
 
 

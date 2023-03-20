@@ -42,6 +42,8 @@ export default connect(
     await axios.get("http://localhost:3000/api/traits")
     .then((res) => {
       setTrait(res.data)
+      console.log(res.data);
+      
       // dispatch(setTraitState(res.data));
     })
   }
