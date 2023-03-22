@@ -21,7 +21,7 @@ export default connect(
 )<FC<IProps>>(({ traits }) => {
   return (
     <div className=" w-full px-2">
-      <h1 className="text-2xl"> <span className="text-colorText">85</span> Saved Rules</h1>
+      <h1 className="text-2xl"> <span className="text-colorText">{traits?.static_rules && traits?.static_rules.length}</span> Saved Rules</h1>
       <div className="w-full py-10 flex flex-wrap justify-between items-center">
 
         {traits?.static_rules.map((rule, index) => {
