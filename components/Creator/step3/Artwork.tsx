@@ -5,7 +5,7 @@ import Traits from "./Traits";
 import Link from "next/link";
 import StepComponent from "@/components/Creator/compos/StepComponent";
 import type { IFullTrait } from "@/store/slices/traitSlice";
-import { setTraitState } from "@/store/slices/traitSlice"
+import { getInitialTrait } from "@/store/slices/traitSlice"
 import axios from "axios";
 
 
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      setTrait: setTraitState
+      setTrait: getInitialTrait
     },
     dispatch
   );
@@ -35,34 +35,13 @@ export default connect(
   mapDispatchToProps
 )<FC<IProps>>(({traits, setTrait}) => {
 
-
-  const fetchTraits = async () => {
-
-    await axios.get("https://stoplight.io/mocks/amplitud/backend-apis/142319058/creators/collections/get-generative-configuration/33")
-    .then((res) => {
-      const traits_and_attributes = Object.entries(res.data.traits_and_attributes).map((e: any) => {
-        const attributes =  Object.entries(e[1].attributes).map((f:any) => {
-          return {
-            id: f[0],
-            ...f[1]
-          }
-        });
-
-        return {
-          ...e[1],
-          attributes: attributes,
-          id: e[0],
-        }
-      });   
-      setTrait({...res.data, traits_and_attributes});
-    })
-  }
-
   useEffect(() => {
-    fetchTraits()
+    setTrait()    
   },[])
 
 
+  console.log('traits', traits);
+  
   return (
     <div id="artwork" className="flex flex-col justify-center items-center w-3/4 mt-10 ">
 
