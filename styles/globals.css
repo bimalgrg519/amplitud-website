@@ -1,0 +1,131 @@
+@import url("https://fonts.cdnfonts.com/css/gilroy-bold");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+font-family: 'Gilroy-Bold', sans-serif;
+font-family: 'Gilroy-Heavy', sans-serif;
+font-family: 'Gilroy-Light', sans-serif;
+font-family: 'Gilroy-Medium', sans-serif;
+font-family: 'Gilroy-Regular', sans-serif;  */
+
+:root {
+  --colorText: #565773;
+  --primaryColor: #f5f3f3;
+  --secondaryColor: #6442ff;
+  --lightPurple: #efebfe;
+  --whiteText: #ffffff;
+  --lightGray: rgba(86, 87, 115, 0.35);
+  --inputColor: rgba(194, 196, 255, 0.5);
+  --greenButton: rgba(140, 213, 201, 0.75);
+  --ClearGreenButton: rgba(161, 243, 229, 0.75);
+  --yellowButton: rgba(222, 152, 61, 0.25);
+  --ClearYellowButton: rgba(255, 181, 84, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: "Gilroy-Regular", sans-serif;
+  color: #565773;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--primaryColor);
+}
+
+/*GLOBAL FONTS SETTINGS*/
+
+h1 {
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
+/* NAV */
+
+/* Nav span in bold*/
+nav span {
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
+/*Active class for li in nav*/
+
+nav .active {
+  transition: all 0.5s ease;
+  color: var(--secondaryColor);
+}
+
+/* active class for creator nav */
+
+#creatorNav .active {
+  transition: all 0.5s ease;
+  color: var(--secondaryColor);
+  border-bottom: 3px solid var(--secondaryColor);
+}
+
+/* Error message style from Figma */
+
+#errorMessage {
+  /* position: absolute;
+  width: 605px;
+  height: 65px;
+  left: 1160px;
+  top: 430px; */
+
+  background: rgba(255, 29, 29, 0.5);
+  box-shadow: 0px 4px 50px rgba(253, 139, 142, 0.5);
+}
+
+/* ALERT BOX */
+
+#alertBox {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0px 4px 25px rgba(186, 180, 211, 0.2);
+  backdrop-filter: blur(12.5px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 24px;
+}
+
+/* ARTWORK COMPONENTS CSS CLASS*/
+
+button.active {
+  background: var(--secondaryColor);
+  color: var(--whiteText);
+}
+
+.likelihoodeBtn.active {
+  background: var(--secondaryColor);
+}
+.likelihoodRounded.active {
+  background: var(--secondaryColor);
+}
+
+/* Active class for trait in Combination page */
+
+.trait.active {
+  background: var(--secondaryColor);
+  color: var(--whiteText);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondaryColor);
+
+  border-radius: 14px;
+}
