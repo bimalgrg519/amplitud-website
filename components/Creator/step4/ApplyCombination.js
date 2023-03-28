@@ -15,6 +15,7 @@ export default function ApplyCombination() {
     const [attributeLeft, setAttributeLeft] = useState("")
     const [traitRight, setTraitRight] = useState("")
     const [attributeRight, setAttributeRight] = useState("")
+    const [parentSelected, setParentSelected] = useState("")
 
 
     useEffect(() => {
@@ -37,13 +38,12 @@ export default function ApplyCombination() {
                     <div className="p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll">
                         {
                             traits_type.map((trait) => (
-                                <button disabled={traitRight === trait.name ? true : false} key={trait.id} onClick={(e) => singleElementClickTrait(e, trait.name, setTraitLeft, traitLeft)}
+                                <button  key={trait.id} onClick={(e) => singleElementClickTrait(e, trait.name, setTraitLeft, traitLeft, parentSelected, setParentSelected, attributeLeft)}
                                 className={` 
-                                    flex justify-start items-center w-40 min-h-[50px] p-1 px-5 my-1.5 rounded-xl bg-lightGrayCube
+                                    cursor-pointer flex justify-start items-center w-40 min-h-[50px] p-1 px-5 my-1.5 rounded-xl
                                     transition-all duration-200 ease-in-out
-                                    trait
-                                    ${traitRight === trait.name ? "blur-[2px] cursor-default " : "blur-0 cursor-pointer hover:bg-secondaryColor hover:text-whiteText"}
-
+                                    
+                                    ${traitLeft === trait.name || parentSelected === trait.name ? "bg-secondaryColor text-whiteText" : "bg-lightGrayCube text-darkText"}
                                 `}>
                                     {trait.name}
                                 </button>
@@ -54,13 +54,12 @@ export default function ApplyCombination() {
                         {
                             traits_type2.map((trait) => (
 
-                                <button disabled={attributeRight === trait.name ? true : false}  key={trait.id} onClick={(e) => singleElementClickAttributeLeft(e, trait.name, setAttributeLeft, attributeLeft)}
+                                <button disabled={attributeRight === trait.name ? true : false}  key={trait.id} onClick={(e) => singleElementClickAttributeLeft(e, trait.name, setTraitLeft, traitLeft, setAttributeLeft, attributeLeft, setParentSelected, parentSelected, trait.parent)}
                                 className={` 
                                     flex justify-start items-center w-40 min-h-[50px] p-1 px-5 my-1.5 rounded-xl bg-lightGrayCube
                                     transition-all duration-200 ease-in-out
-                                    trait
-                                    ${attributeRight === trait.name ? "blur-[2px] cursor-default " : "blur-0 cursor-pointer hover:bg-secondaryColor hover:text-whiteText"}
-
+                                    
+                                    
                                 `}>
                                     {trait.name}
                                 </button>
@@ -106,12 +105,12 @@ export default function ApplyCombination() {
                     <div className="p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll">
                         {
                             traits_type.map((trait) => (
-                                <button  disabled={traitLeft === trait.name ? true : false} key={trait.id} onClick={(e) => singleElementClickTrait(e, trait.name, setTraitRight, traitRight)} className={` 
+                                <button  disabled={traitLeft === trait.name || parentSelected === trait.name ? true : false} key={trait.id} onClick={(e) => singleElementClickTrait(e, trait.name, setTraitRight, traitRight)} className={` 
                                     flex justify-start items-center w-40 min-h-[50px] p-1 px-5 my-1.5 rounded-xl bg-lightGrayCube 
                                     transition-all duration-200 ease-in-out
                                     
                                     trait
-                                    ${traitLeft === trait.name ? "blur-[2px] cursor-default" : "blur-0 cursor-pointer hover:bg-secondaryColor hover:text-whiteText"}
+                                    ${traitLeft === trait.name || parentSelected === trait.name ? "blur-[2px] cursor-default" : "blur-0 cursor-pointer hover:bg-secondaryColor hover:text-whiteText"}
                                 `}>
                                     {trait.name}
                                 </button>
@@ -121,12 +120,11 @@ export default function ApplyCombination() {
                     <div className="p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll ml-1 border-l-2 border-secondaryColor border-dotted">
                         {
                             traits_type2.map((trait) => (
-                                <button disabled={attributeLeft === trait.name ? true : false} key={trait.id} onClick={(e) => singleElementClickAttributeLeft(e, trait.name, setAttributeRight , attributeRight)} className={` 
+                                <button disabled={attributeLeft === trait.name || parentSelected === trait.parent ? true : false} key={trait.id} onClick={(e) => singleElementClickAttributeLeft(e, trait.name, setAttributeRight , attributeRight)} className={` 
                                     flex justify-start items-center w-40 min-h-[50px] p-1 px-5 my-1.5 rounded-xl bg-lightGrayCube
                                     transition-all duration-200 ease-in-out
                                     trait
-                                    ${attributeLeft === trait.name ? "blur-[2px] cursor-default " : "blur-0 cursor-pointer hover:bg-secondaryColor hover:text-whiteText"}
-
+                                    ${attributeLeft === trait.name || parentSelected === trait.parent ? "blur-[2px] cursor-default " : "blur-0 cursor-pointer hover:bg-secondaryColor hover:text-whiteText"}
                                 `}>
                                     {trait.name}
                                 </button>

@@ -13,7 +13,7 @@ export default function traitsRarity() {
                 <h1>Please connect via desktop <span className=' ml-4'>🖥</span> </h1>
             </div>
            
-            <div className='w-screen large:blur-[10px] relative'>
+            <div className='w-screen large:blur-[10px] relative px-28'>
                 <div className='lg:hidden w-full h-full z-50 bg-transparent absolute top-0 left-0' />
                 <CreatorNav />
                 <Artwork />

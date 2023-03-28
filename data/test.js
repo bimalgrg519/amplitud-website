@@ -6,6 +6,7 @@ export const traits_type2 = [
     {
         id: 1,
         name: "BLACK-1",
+        parent: "Background",
 
     },
     {
@@ -16,11 +17,15 @@ export const traits_type2 = [
     {
         id: 3,
         name: "Yellow-30",
+        parent: "Background",
+
 
     },
     {
         id: 4,
         name: "Green-20",
+        parent: "Background",
+
 
     },
     {

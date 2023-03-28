@@ -29,7 +29,6 @@ export default function Rule() {
                         <div className="my-5 w-1/5 aspect-square  bg-lightGrayCube rounded-xl" />  
                         <div className="my-5 w-1/5 aspect-square  bg-lightGrayCube rounded-xl" />  
                         <div className="my-5 w-1/5 aspect-square  bg-lightGrayCube rounded-xl" />  
-                        <div className="my-5 w-1/5 aspect-square  bg-lightGrayCube rounded-xl" />  
                     </div>
                 </div>
 

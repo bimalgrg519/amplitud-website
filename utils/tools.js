@@ -27,8 +27,9 @@ export const liClickToggle = (e) => {
     li.classList.add("active");
 }
 
-export const singleElementClickTrait = (e, traitName, setTraitLeft, traitLeft) => {
+export const singleElementClickTrait = (e, traitName, setTraitLeft, traitLeft , parentSelected, setParentSelected, attributeLeft) => {
   const element = e.target;
+
 
   if(traitName === traitLeft){
     setTraitLeft("");
@@ -54,15 +55,32 @@ export const singleElementClickTrait = (e, traitName, setTraitLeft, traitLeft) =
     element.disabled = false;
   }
 };
-export const singleElementClickAttributeLeft = (e, traitName, setAttributeLeft, attributeLeft) => {
+export const singleElementClickAttributeLeft = (e, traitName, setTraitLeft, traitLeft, setAttributeLeft, attributeLeft, setParentSelected, parentSelected, parent) => {
   const element = e.target;
 
-  if(traitName === attributeLeft){
-    setAttributeLeft("");
-  }else{
-    setAttributeLeft(traitName);
+  try {
+    if(parentSelected === ""){
+      setParentSelected(parent)
+    }else {
+      setParentSelected("")
+      setTraitLeft("")
+    }
+  } catch (error) {
+    
   }
-  console.log("attribute", traitName)
+
+  try {
+    if(traitName === attributeLeft){
+      setAttributeLeft("");
+    }else{
+      setAttributeLeft(traitName);
+    }
+  } catch (error) {
+    
+  }
+
+
+  // console.log("attribute", traitName)
 
   const parentElement = element.parentElement;
   const buttons = parentElement.children;

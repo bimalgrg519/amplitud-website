@@ -17,7 +17,7 @@ export default function SavedRules() {
             <div className="w-full flex justify-between items-center pt-10 px-8">
                 <div className=" w-6/12   h-20 flex justify-between items-center 2xl:w-4/12">
                     <Link className=" 
-                        p-3 flex justify-center items-center border-2 border-secondaryColor text-colorText text-sm w-52 rounded-full cursor-pointer z-10
+                        p-3 flex justify-center items-center border-2 border-secondaryColor text-colorText text-sm w-52 min-w-[220px] mx-1 rounded-full cursor-pointer z-10
                     " href="/" >
                         <svg className=" mx-2 scale-75" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 0L8.41 1.41L3.83 6H20V8H3.83L8.42 12.59L7 14L0 7L7 0Z" fill="#565773"/>
@@ -25,7 +25,7 @@ export default function SavedRules() {
                         <h3>Back to upload layers</h3>
                     </Link>
                     <Link className=" 
-                        p-3 flex justify-center items-center border-2 border-secondaryColor text-colorText text-sm w-32 rounded-full cursor-pointer z-10
+                        p-3 flex justify-center items-center border-2 border-secondaryColor text-colorText text-sm w-32 min-w-[140px] mx-1 rounded-full cursor-pointer z-10
                         transition-all duration-200 ease-in-out
                     " href="/" >
                         <svg className=" path mx-2 scale-75" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@ export default function SavedRules() {
                         <h3>Layer order</h3>
                     </Link>
                     <Link className=" 
-                        p-3 flex justify-center items-center border-2 border-secondaryColor text-colorText text-sm w-52   rounded-full cursor-pointer z-10
+                        p-3 flex justify-center items-center border-2 border-secondaryColor text-colorText text-sm w-52 min-w-[200px] mx-1   rounded-full cursor-pointer z-10
                         transition-all duration-200 ease-in-out
                     " href="/artwork/traitsRarity" >
                         <svg className=" path mx-2 scale-75" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
