@@ -4,10 +4,10 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
- 
+
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
-  ],  theme: {
+  ], theme: {
     // pixels: {
     //   '1': '1px',
     //   '2': '2px',
@@ -17,8 +17,8 @@ module.exports = {
     extend: {
       screens: {
 
-  
-        'mobile-tablet': {'max': '1023px'},
+
+        'mobile-tablet': { 'max': '1023px' },
         // => @media (max-width: 1023px) { ... }
 
       },
@@ -29,10 +29,11 @@ module.exports = {
         'gilroy-medium': ['Gilroy-Medium', 'sans-serif'],
         'gilroy-heavy': ['Gilroy-Heavy', 'sans-serif'],
         'gilroy-light': ['Gilroy-Light', 'sans-serif'],
+        'gilroy-test': ['Gilroy-Test', 'sans-serif'],
       },
-  
+
       colors: {
-        transparent : "transparent",
+        transparent: "transparent",
         primaryColor: "#f5f3f3",
         secondaryColor: "#6442ff",
         lightPurple: "#efebfe",
@@ -47,23 +48,23 @@ module.exports = {
         yellowButton: "rgba(194, 133, 53, 0.25)",
         clearYellowButton: "rgba(255, 166, 50, 0.25)",
         alertBoxBg: "rgba(255, 255, 255, 0.35)",
-        
+
       },
-        screens: {
-          '2xlarge': {'max': '1535px'},
-          // => @media (max-width: 1535px) { ... }
+      screens: {
+        '2xlarge': { 'max': '1535px' },
+        // => @media (max-width: 1535px) { ... }
 
-          'xlarge': {'max': '1279px'},
-          // => @media (max-width: 1279px) { ... }
+        'xlarge': { 'max': '1279px' },
+        // => @media (max-width: 1279px) { ... }
 
-          'large': {'max': '1023px'},
-          // => @media (max-width: 1023px) { ... }
+        'large': { 'max': '1023px' },
+        // => @media (max-width: 1023px) { ... }
 
-          'medium': {'max': '767px'},
-          // => @media (max-width: 767px) { ... }
+        'medium': { 'max': '767px' },
+        // => @media (max-width: 767px) { ... }
 
-          'small': {'max': '639px'},
-          // => @media (max-width: 639px) { ... }
+        'small': { 'max': '639px' },
+        // => @media (max-width: 639px) { ... }
       },
     },
 
