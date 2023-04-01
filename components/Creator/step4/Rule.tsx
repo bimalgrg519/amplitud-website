@@ -14,7 +14,10 @@ export default connect(
   return (
     <div className="w-[45%] m-4 h-80 2xl:h-96 border-2 border-lightGray rounded-xl flex flex-col justify-center items-center">
 
-      <div className="w-full px-8 flex justify-center items-center ">
+      <div className="w-full flex justify-around items-center">
+
+
+        
         <div className=" mx-4 flex justify-center flex-col">
           <div className="flex pl-2 flex-col justify-start items-start pt-5">
             <h3 className="text-xs text-lightGray">{rule.trait}</h3>
