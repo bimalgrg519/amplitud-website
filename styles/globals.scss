@@ -67,6 +67,30 @@ nav .active {
   border-bottom: 3px solid var(--secondaryColor);
 }
 
+/* Error message style from Figma */
+
+#errorMessage {
+  /* position: absolute;
+  width: 605px;
+  height: 65px;
+  left: 1160px;
+  top: 430px; */
+  color: white;
+  background: rgba(255, 29, 29, 0.5);
+  box-shadow: 0px 4px 50px rgba(253, 139, 142, 0.5);
+}
+
+/* ALERT BOX */
+
+#alertBox {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0px 4px 25px rgba(186, 180, 211, 0.2);
+  backdrop-filter: blur(12.5px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 24px;
+}
+
 /* ARTWORK COMPONENTS CSS CLASS*/
 
 button.active {
@@ -79,6 +103,13 @@ button.active {
 }
 .likelihoodRounded.active {
   background: var(--secondaryColor);
+}
+
+/* Active class for trait in Combination page */
+
+.trait.active {
+  background: var(--secondaryColor);
+  color: var(--whiteText);
 }
 
 /* Chrome, Edge, and Safari */
@@ -99,4 +130,12 @@ button.active {
 .selectTrait {
   background: var(--secondaryColor);
   color: #efebfe;
+}
+
+.text-error {
+  color: rgba(255, 29, 29, 0.9);
+}
+
+.text-success {
+  color: rgba(0, 173, 29, 0.9);
 }
