@@ -1,7 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { AppState } from "@/store";
-import { HYDRATE } from "next-redux-wrapper";
+import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { AppState } from "@/store";
 import axios from "axios";
+import { cloneObj } from "@/utils/tools";
 
 export type TTrait =
   | "Background"
@@ -106,9 +107,39 @@ export const traitSlice = createSlice({
   initialState,
   reducers: {
     // Action to set the Trait Type
-    // setTraitState(state, action): void {
-    //   state.traitState = action.payload;
-    // },
+    updateTraitWeight(state: any, action): void {
+      const index = state.traitState.traits_and_attributes.findIndex(
+        (e) => e.id === action.payload.id
+      );
+
+      if (action.payload.weight > 1) {
+        action.payload.weight = 1;
+      }
+
+      state.traitState.traits_and_attributes[index] = action.payload;
+
+      state.traitState = {
+        ...state.traitState,
+        traits_and_attributes: state.traitState.traits_and_attributes,
+      };
+    },
+    updateAtributeWeight: (state: any, action) => {
+      const indexTrait = state.traitState.traits_and_attributes.findIndex(
+        (e) => e.id === action.payload.trait
+      );
+
+      const indexAttr = state.traitState.traits_and_attributes[
+        indexTrait
+      ].attributes.findIndex((e) => e.id === action.payload.attribute.id);
+
+      state.traitState.traits_and_attributes[indexTrait].attributes[indexAttr] =
+        action.payload.attribute;
+
+      state.traitState = {
+        ...state.traitState,
+        traits_and_attributes: state.traitState.traits_and_attributes,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getInitialTrait.fulfilled, (state, { payload }) => {
@@ -117,7 +148,7 @@ export const traitSlice = createSlice({
   },
 });
 
-// export const { setTraitState } = traitSlice.actions;
+export const { updateTraitWeight, updateAtributeWeight } = traitSlice.actions;
 
 export const selectTraitState = (state: AppState) => state.trait.traitState;
 
