@@ -1,14 +1,25 @@
-import type { IRules } from "@/store/slices/traitSlice";
+import type { IRules, IFullTrait } from "@/store/slices/traitSlice";
 import { FC } from "react";
 import { connect } from "react-redux";
+import artwork from "@/utils/generator";
 interface IProps {
   rule: IRules;
+  traits: IFullTrait;
 }
 
+
+const mapStateToProps = (state) => {
+  return {
+    traits: state?.trait?.traitState,
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   null
-)<FC<IProps>>(({ rule }) => {
+)<FC<IProps>>(({ rule, traits }) => {
+
+  const pngs = artwork.generateRulePreview(traits.traits_and_attributes, traits.trait_order, rule, 4);
 
   const sentenceType = rule.type === "exclusion" ? "Cannot combine with" : "Combine with"
   return (
@@ -24,7 +35,11 @@ export default connect(
             <h2 className="text-sm text-colorText">{rule.attribute}</h2>
           </div>
           <div className="my-5">
-            <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40" />
+            <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40 relative" style={{ overflow: "hidden" }}>
+              {pngs[0] && pngs[0].map((e, i) => {
+                return <img src={process.env.NEXT_PUBLIC_S3_URL + e} className="superpose" style={{zIndex: 10 + i}}/>
+              })}
+            </div>
           </div>
         </div>
         <div className=" mx-4 flex justify-center flex-col">
@@ -33,8 +48,16 @@ export default connect(
             <h2 className="text-sm text-colorText">{sentenceType}</h2>
           </div>
           <div className="my-5 flex ">
-            <div className=" w-28  h-28  bg-lightPurple rounded-xl  2xl:w-40 2xl:h-40" />
-            <div className=" w-28  h-28  bg-lightPurple rounded-xl ml-6  2xl:w-40 2xl:h-40" />
+            <div className=" w-28  h-28  bg-lightPurple rounded-xl  2xl:w-40 2xl:h-40 relative" style={{ overflow: "hidden" }}>
+            {pngs[1] && pngs[1].map((e, i) => {
+                return <img src={process.env.NEXT_PUBLIC_S3_URL + e} className="superpose" style={{zIndex: 10 + i}}/>
+              })}
+            </div>
+            <div className=" w-28  h-28  bg-lightPurple rounded-xl ml-6  2xl:w-40 2xl:h-40 relative" style={{ overflow: "hidden" }}>
+            {pngs[2] && pngs[2].map((e, i) => {
+                return <img src={process.env.NEXT_PUBLIC_S3_URL + e} className="superpose" style={{zIndex: 10 + i}}/>
+              })}
+            </div>
           </div>
         </div>
         <div className=" mx-4 flex justify-center flex-col">
@@ -43,7 +66,12 @@ export default connect(
             <h2 className="text-sm text-colorText">{rule.others.map(e => e.attribute).join(' - ')}</h2>
           </div>
           <div className="my-5">
-            <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40" />
+            <div className=" w-28  h-28  bg-lightPurple rounded-xl 2xl:w-40 2xl:h-40 relative" style={{ overflow: "hidden" }}>
+
+            {pngs[3] && pngs[3].map((e, i) => {
+                return <img src={process.env.NEXT_PUBLIC_S3_URL + e} className="superpose" style={{zIndex: 10 + i}}/>
+              })}
+            </div>
           </div>
         </div>
 
