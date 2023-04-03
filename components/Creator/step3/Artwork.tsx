@@ -86,7 +86,7 @@ export default connect(
           </Link>
         </div>
         {isConform && <div className=" h-20 flex justify-center items-center  ">
-          <Link className="bg-secondaryColor text-whiteText p-3 flex justify-center items-center border-2 border-secondaryColor text-sm w-32 rounded-full cursor-pointer z-10 " href="/artwork/step4">
+          <Link className="bg-secondaryColor text-whiteText p-3 flex justify-center items-center border-2 border-secondaryColor text-sm w-32 rounded-full cursor-pointer z-10 " href="/Artwork/step4">
             <h3>Next step</h3>
             <svg className=" mx-2 scale-75 rotate-180" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 0L8.41 1.41L3.83 6H20V8H3.83L8.42 12.59L7 14L0 7L7 0Z" fill="#ffffff" />
