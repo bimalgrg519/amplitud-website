@@ -41,8 +41,10 @@ export interface IRules {
 }
 
 export interface IToken {
-  trait: TTrait;
-  attribute: string;
+  tokenId: number;
+  metadata: {
+    [key: string]: string;
+  };
 }
 
 export interface IFullTrait {
@@ -51,6 +53,7 @@ export interface IFullTrait {
   traits_and_attributes: ITraitDetail[];
   static_rules: IRules[];
   tokens: IToken[];
+  trait_order: TTrait[];
 }
 
 export interface IState {
@@ -76,30 +79,39 @@ const initialState: IState = {
   traitState: null,
 };
 
-export const getInitialTrait = createAsyncThunk("trait/initTrait", async () => {
-  const response = await axios.get(
-    process.env.NEXT_PUBLIC_API_URL + "get-generative-configuration/33"
-  );
+export const getInitialTrait = createAsyncThunk(
+  "trait/initTrait",
+  async (arg, { getState }) => {
+    const state: any = getState(); // <-- invoke and access state object
 
-  const traits_and_attributes = Object.entries(
-    response.data.traits_and_attributes
-  ).map((e: any) => {
-    const attributes = Object.entries(e[1].attributes).map((f: any) => {
-      return {
-        id: f[0],
-        ...f[1],
-      };
-    });
+    const traitState = state.trait.traitState;
 
-    return {
-      ...e[1],
-      attributes: attributes,
-      id: e[0],
-    };
-  });
+    if (traitState === null) {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_API_URL + "get-generative-configuration/33"
+      );
 
-  return { ...response.data, traits_and_attributes };
-});
+      const traits_and_attributes = Object.entries(
+        response.data.traits_and_attributes
+      ).map((e: any) => {
+        const attributes = Object.entries(e[1].attributes).map((f: any) => {
+          return {
+            id: f[0],
+            ...f[1],
+          };
+        });
+        return {
+          ...e[1],
+          attributes: attributes,
+          id: e[0],
+        };
+      });
+      return { ...response.data, traits_and_attributes };
+    } else {
+      return traitState;
+    }
+  }
+);
 
 // Actual Slice
 export const traitSlice = createSlice({
@@ -140,6 +152,13 @@ export const traitSlice = createSlice({
         traits_and_attributes: state.traitState.traits_and_attributes,
       };
     },
+    updateRules: (state: any, action) => {
+      console.log("dfqsdfqsd", action);
+      state.traitState = {
+        ...state.traitState,
+        static_rules: action.payload,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getInitialTrait.fulfilled, (state, { payload }) => {
@@ -148,7 +167,8 @@ export const traitSlice = createSlice({
   },
 });
 
-export const { updateTraitWeight, updateAtributeWeight } = traitSlice.actions;
+export const { updateTraitWeight, updateAtributeWeight, updateRules } =
+  traitSlice.actions;
 
 export const selectTraitState = (state: AppState) => state.trait.traitState;
 

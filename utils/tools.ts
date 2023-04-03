@@ -5,6 +5,7 @@ import type {
   TMangeTypeOfRule,
   ITraitAttribute,
   ICombinaisons,
+  IRules,
 } from "@/store/slices/traitSlice";
 
 export const getPercents = (e: any): void => {
@@ -174,4 +175,24 @@ export const checkGlobalConfomityAttribute = (trait: ITraitDetail): boolean => {
   }, 0);
 
   return sumWeight !== 1 ? false : true;
+};
+
+export const checkFullConformity = (traits: ITraitDetail[]): boolean => {
+  let isConform = true;
+  if (traits) {
+    traits.forEach((element) => {
+      if (!checkGlobalConfomityAttribute(element)) {
+        isConform = false;
+      }
+    });
+  }
+  return isConform;
+};
+
+export const ruleConversion = (combinations): IRules => {
+  return {
+    ...combinations.main,
+    type: combinations.type,
+    others: [...combinations.rules],
+  };
 };
