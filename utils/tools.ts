@@ -22,6 +22,38 @@ export const getPercents = (e: any): void => {
   }
 };
 
+// utils/getPercents.js
+export const getPercentsTrait = (e, setInputValue, setInputValueInt) => {
+  let nb = e.target.id;
+  let percentageValue = `${nb * 10}%`;
+  setInputValue(percentageValue);
+
+  const numStr = percentageValue.replace("%", "");
+  const num = parseInt(numStr);
+  setInputValueInt(num);
+
+  const element = e.target;
+  const list = element.parentElement;
+  const elements = list.children;
+
+  if (nb === "1" && element.classList.contains("active")) {
+    e.target.classList.remove("active");
+    setInputValue("");
+    setInputValueInt(0);
+    for (let i = 1; i <= elements.length; i++) {
+      elements[i - 1].classList.remove("active");
+    }
+  } else {
+    for (let i = 1; i <= elements.length; i++) {
+      if (i <= nb) {
+        elements[i - 1].classList.add("active");
+      } else if (i > nb) {
+        elements[i - 1].classList.remove("active");
+      }
+    }
+  }
+};
+
 export const liClickToggle = (e): void => {
   const li = e.target;
   const ul = li.parentElement;
@@ -112,4 +144,34 @@ export const manageRuleSchema = (
 
 export const cloneObj = (obj) => {
   return JSON.parse(JSON.stringify(obj));
+};
+
+export const isActivePercent = (id: number, value: number): boolean => {
+  return id <= Math.round(value / 10) ? true : false;
+};
+
+export const checkWeightConfomityAttribute = (
+  trait: ITraitDetail,
+  index: number,
+  value: number
+): boolean => {
+  const newTrait = cloneObj(trait);
+
+  newTrait.attributes[index] = {
+    ...trait.attributes[index],
+    weight: value,
+  };
+  const sumWeight = newTrait.attributes.reduce((sum, e) => {
+    return sum + (e.weight === null ? 0 : e.weight);
+  }, 0);
+
+  return sumWeight > 1 ? false : true;
+};
+
+export const checkGlobalConfomityAttribute = (trait: ITraitDetail): boolean => {
+  const sumWeight = trait.attributes.reduce((sum, e) => {
+    return sum + (e.weight === null ? 0 : e.weight);
+  }, 0);
+
+  return sumWeight !== 1 ? false : true;
 };

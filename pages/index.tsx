@@ -4,6 +4,9 @@ import Head from 'next/head'
 import CreatorNav from '@/components/Creator/compos/CreatorNav'
 import Artwork from '@/components/Creator/step3/Artwork';
 import { selectLoaderState } from "@/store/slices/loaderSlice";
+import { selectErrorState } from "@/store/slices/errorSlice";
+import type { IError }  from "@/store/slices/errorSlice";
+import ErrorMessage from "@/components/Creator/compos/ErrorMessage";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 
@@ -22,6 +25,7 @@ TopBarProgress.config({
 export default (() => {
 
   const isLoader: boolean = useSelector(selectLoaderState);
+  const errorMessage: IError = useSelector(selectErrorState);  
 
   return (
     <>
@@ -33,9 +37,11 @@ export default (() => {
         {/* <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet" /> */}
       </Head>
       {isLoader && <TopBarProgress />}
+      <ErrorMessage />
       <main className="px-20 flex items-center justify-center flex-col">
         <CreatorNav />
         <Artwork />
+        
       </main>
     </>
   )

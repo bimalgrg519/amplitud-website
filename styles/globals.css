@@ -19,6 +19,10 @@ font-family: 'Gilroy-Regular', sans-serif;  */
   --whiteText: #ffffff;
   --lightGray: rgba(86, 87, 115, 0.35);
   --inputColor: rgba(194, 196, 255, 0.5);
+  --greenButton: rgba(140, 213, 201, 0.75);
+  --ClearGreenButton: rgba(161, 243, 229, 0.75);
+  --yellowButton: rgba(222, 152, 61, 0.25);
+  --ClearYellowButton: rgba(255, 181, 84, 0.25);
 }
 
 * {
@@ -34,7 +38,6 @@ body {
 }
 
 body {
-  min-width: 100vw;
   overflow-x: hidden;
   background: var(--primaryColor);
 }
@@ -75,7 +78,7 @@ nav .active {
   height: 65px;
   left: 1160px;
   top: 430px; */
-  color: white;
+
   background: rgba(255, 29, 29, 0.5);
   box-shadow: 0px 4px 50px rgba(253, 139, 142, 0.5);
 }
@@ -125,17 +128,4 @@ button.active {
   background-color: var(--secondaryColor);
 
   border-radius: 14px;
-}
-
-.selectTrait {
-  background: var(--secondaryColor);
-  color: #efebfe;
-}
-
-.text-error {
-  color: rgba(255, 29, 29, 0.9);
-}
-
-.text-success {
-  color: rgba(0, 173, 29, 0.9);
 }

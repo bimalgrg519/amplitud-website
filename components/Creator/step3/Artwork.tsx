@@ -5,7 +5,7 @@ import Traits from "./Traits";
 import Link from "next/link";
 import StepComponent from "@/components/Creator/compos/StepComponent";
 import type { IFullTrait } from "@/store/slices/traitSlice";
-import { getInitialTrait } from "@/store/slices/traitSlice"
+import { getInitialTrait } from "@/store/slices/traitSlice";
 import axios from "axios";
 
 
@@ -36,11 +36,10 @@ export default connect(
 )<FC<IProps>>(({traits, setTrait}) => {
 
   useEffect(() => {
-    setTrait()    
+    setTrait();
   },[])
 
-
-  console.log('traits', traits);
+  console.log("trait", traits)
   
   return (
     <div id="artwork" className="flex flex-col justify-center items-center w-3/4 mt-10 ">
