@@ -125,7 +125,12 @@ export default connect(
         {createNewOne && (
           <button
             className=' w-40 p-2 rounded-full text-sm bg-transparent border-2 border-secondaryColor text-colorText transition-all duration-300 ease-in-out hover:bg-secondaryColor hover:text-whiteText'
-            onClick={() => setCreateNewOne(false)}
+            onClick={() => {
+              setCreateNewOne(false)
+              setCombinaisons(null);
+              setSelectedTraitCombine(null);
+              setSelectedSubTrait(null);
+            }}
           >
             Cancel
           </button>
@@ -142,6 +147,9 @@ export default connect(
                   updateRules([...traits.static_rules, ruleConversion(combinations)]);
                   setTimeout(() => {
                     setCreateNewOne(false)
+                    setCombinaisons(null);
+                    setSelectedTraitCombine(null);
+                    setSelectedSubTrait(null);
                   }, 200)
                 }}
               >Save</button>
