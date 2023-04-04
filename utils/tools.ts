@@ -196,3 +196,29 @@ export const ruleConversion = (combinations): IRules => {
     others: [...combinations.rules],
   };
 };
+
+export const checkConformityDecimal = (numb: number): boolean => {
+  if (Number.isInteger(numb)) {
+    return true;
+  } else {
+    const check = numb.toString().split(".")[1].length;
+    if (check > 4) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+};
+
+export const convertConformityDecimal = (numb: number): number => {
+  if (Number.isInteger(numb)) {
+    return numb;
+  } else {
+    const check = numb.toString().split(".")[1].length;
+    if (check > 2) {
+      return Number(numb.toFixed(2));
+    } else {
+      return numb;
+    }
+  }
+};

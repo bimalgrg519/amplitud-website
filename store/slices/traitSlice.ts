@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { AppState } from "@/store";
 import axios from "axios";
-import { cloneObj } from "@/utils/tools";
+import { checkConformityDecimal } from "@/utils/tools";
 
 export type TTrait =
   | "Background"
@@ -126,6 +126,11 @@ export const traitSlice = createSlice({
 
       if (action.payload.weight > 1) {
         action.payload.weight = 1;
+      } else if (
+        action.payload.weight !== null &&
+        !checkConformityDecimal(action.payload.weight)
+      ) {
+        action.payload.weight = Number(action.payload.weight.toFixed(4));
       }
 
       state.traitState.traits_and_attributes[index] = action.payload;
@@ -144,6 +149,19 @@ export const traitSlice = createSlice({
         indexTrait
       ].attributes.findIndex((e) => e.id === action.payload.attribute.id);
 
+      console.log("sdsqdqsdqsd", action.payload.attribute.weight);
+
+      if (action.payload.attribute.weight > 1) {
+        action.payload.attribute.weight = 1;
+      } else if (
+        action.payload.attribute.weight !== null &&
+        !checkConformityDecimal(action.payload.attribute.weight)
+      ) {
+        action.payload.attribute.weight = Number(
+          action.payload.attribute.weight.toFixed(4)
+        );
+      }
+
       state.traitState.traits_and_attributes[indexTrait].attributes[indexAttr] =
         action.payload.attribute;
 
@@ -153,7 +171,6 @@ export const traitSlice = createSlice({
       };
     },
     updateRules: (state: any, action) => {
-      console.log("dfqsdfqsd", action);
       state.traitState = {
         ...state.traitState,
         static_rules: action.payload,
