@@ -146,3 +146,42 @@ button.active {
   left: 0px;
   // opacity: 0.5;
 }
+.inputTrait,
+.inputAttribute {
+  transition: all 0.5s;
+  position: relative;
+  &.inputAttribute {
+    width: 5rem;
+    input {
+      width: 45px;
+    }
+  }
+  &.inputTrait {
+    width: 110px;
+    input {
+      width: 65px;
+    }
+  }
+  input {
+    text-align: right !important;
+    &:focus {
+      outline: none !important;
+    }
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .suffix {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    color: black;
+  }
+}
+
+.inputTrait:focus-within,
+.inputAttribute:focus-within {
+  border: 2px solid #6442ff;
+}

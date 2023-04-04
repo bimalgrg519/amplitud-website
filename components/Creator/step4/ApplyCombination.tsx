@@ -1,7 +1,13 @@
 import { FC, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { cloneObj, checkConfomity, manageRuleSchema, checkAddSubRule, ruleConversion } from "@/utils/tools";
+import {
+  cloneObj,
+  checkConfomity,
+  manageRuleSchema,
+  checkAddSubRule,
+  ruleConversion,
+} from "@/utils/tools";
 import artwork from "@/utils/generator";
 import { updateRules } from "@/store/slices/traitSlice";
 import StepComponent from "@/components/Creator/compos/StepComponent";
@@ -12,12 +18,12 @@ import type {
   TMangeTypeOfRule,
   ITraitAttribute,
   ICombinaisons,
-  IRules
+  IRules,
 } from "@/store/slices/traitSlice";
 
 interface IProps {
   traits: IFullTrait;
-  updateRules: any
+  updateRules: any;
 }
 
 const mapStateToProps = (state) => {
@@ -29,12 +35,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      updateRules
+      updateRules,
     },
     dispatch
   );
 };
-
 
 const model: ICombinaisons = {
   main: {
@@ -45,14 +50,13 @@ const model: ICombinaisons = {
   rules: [],
   tmp: {
     trait: null,
-    attribute: null
-  }
+    attribute: null,
+  },
 };
 
 const classNameTrait: string = `flex justify-start items-center w-40 min-h-[50px] p-1 px-5 my-1.5 rounded-xl bg-lightGrayCube cursor-pointer
 transition-all duration-200 ease-in-out
 hover:bg-secondaryColor hover:text-whiteText`;
-
 
 const classNameTraitWh: string = `flex justify-start items-center w-40 min-h-[50px] p-1 px-5 my-1.5 rounded-xl bg-lightGrayCube
 transition-all duration-200 ease-in-out`;
@@ -63,8 +67,7 @@ export default connect(
 )<FC<IProps>>(({ traits, updateRules }) => {
   const [selectedTraitCombine, setSelectedTraitCombine] =
     useState<ITraitDetail>(null);
-  const [selectedSubTrait, setSelectedSubTrait] =
-    useState<ITraitDetail>(null);
+  const [selectedSubTrait, setSelectedSubTrait] = useState<ITraitDetail>(null);
   const [combinations, setCombinaisons] = useState<ICombinaisons>(null);
   const [createNewOne, setCreateNewOne] = useState<boolean>(false);
 
@@ -73,31 +76,34 @@ export default connect(
     trait: ITraitDetail
   ) => setSelectedTraitCombine(trait);
 
-  const clickSubTrait = (
-    event: React.MouseEvent<any>,
-    trait: ITraitDetail
-  ) => setSelectedSubTrait(trait);
+  const clickSubTrait = (event: React.MouseEvent<any>, trait: ITraitDetail) =>
+    setSelectedSubTrait(trait);
 
   const manageRule = (
     event: React.MouseEvent<any>,
     elem: any,
-    type:TMangeTypeOfRule
+    type: TMangeTypeOfRule
   ): void => {
     const data = combinations == null ? model : combinations;
     setCombinaisons(manageRuleSchema(data, type, elem));
   };
 
   const addNewRule = (event: React.MouseEvent<any>) => {
-    const cbm: ICombinaisons = cloneObj({...combinations });
+    const cbm: ICombinaisons = cloneObj({ ...combinations });
     cbm.rules.push(combinations.tmp);
     cbm.tmp.trait = null;
     cbm.tmp.attribute = null;
-    setCombinaisons({...cbm})
-  }
+    setCombinaisons({ ...cbm });
+  };
 
   const generatePng = (traits, combinations, number) => {
-    return artwork.generateRulePreview(traits.traits_and_attributes, traits.trait_order, ruleConversion(combinations), number)
-  }
+    return artwork.generateRulePreview(
+      traits.traits_and_attributes,
+      traits.trait_order,
+      ruleConversion(combinations),
+      number
+    );
+  };
 
   return (
     <div className='w-full pt-10 flex flex-col justify-start items-start '>
@@ -121,12 +127,11 @@ export default connect(
           </button>
         )}
 
-
         {createNewOne && (
           <button
             className=' w-40 p-2 rounded-full text-sm bg-transparent border-2 border-secondaryColor text-colorText transition-all duration-300 ease-in-out hover:bg-secondaryColor hover:text-whiteText'
             onClick={() => {
-              setCreateNewOne(false)
+              setCreateNewOne(false);
               setCombinaisons(null);
               setSelectedTraitCombine(null);
               setSelectedSubTrait(null);
@@ -138,26 +143,29 @@ export default connect(
       </div>
       {createNewOne && (
         <div className='relative min-h-[50vh] py-16  w-full flex justify-around items-center'>
-
-          {
-            checkConfomity(combinations) && 
-              <button 
-                className="p-2 w-28 text-sm text-whiteText bg-secondaryColor rounded-full absolute right-4 -bottom-5 2xl:right-24"
-                onClick={() => {
-                  updateRules([...traits.static_rules, ruleConversion(combinations)]);
-                  setTimeout(() => {
-                    setCreateNewOne(false)
-                    setCombinaisons(null);
-                    setSelectedTraitCombine(null);
-                    setSelectedSubTrait(null);
-                  }, 200)
-                }}
-              >Save</button>
-          }
+          {checkConfomity(combinations) && (
+            <button
+              className='p-2 w-28 text-sm text-whiteText bg-secondaryColor rounded-full absolute right-4 -bottom-5 2xl:right-24'
+              onClick={() => {
+                updateRules([
+                  ...traits.static_rules,
+                  ruleConversion(combinations),
+                ]);
+                setTimeout(() => {
+                  setCreateNewOne(false);
+                  setCombinaisons(null);
+                  setSelectedTraitCombine(null);
+                  setSelectedSubTrait(null);
+                }, 200);
+              }}
+            >
+              Save
+            </button>
+          )}
 
           <div className=' h-[450px] rounded-xl border-2 border-inputColor flex '>
             <div className='p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll'>
-              {traits?.traits_and_attributes.map((trait,index) => (
+              {traits?.traits_and_attributes.map((trait, index) => (
                 <div
                   onClick={(event) => {
                     manageRule(event, trait, "main-trait");
@@ -228,21 +236,40 @@ export default connect(
             {checkConfomity(combinations) && (
               <div className=' w-full flex flex-col justify-center items-center text-sm mt-10'>
                 <h3 className='text-colorText mb-4'>Preview</h3>
-                <h3 className="text-xs text-lightGray">{combinations.main.trait}</h3>
-                <h2 className="text-sm text-colorText">{combinations.main.attribute}</h2>
-                <div className='flex justify-between items-center w-full p-2 border-inputColor border-2 rounded-xl' >
-
-                  {generatePng(traits, combinations, 3).map((e,i) => {
-                    return <div key={`square_${i}`}className='relative h-28 w-28 rounded-xl bg-lightGrayCube' style={{ overflow: "hidden" }}>
-                      {e.map((f,index) => {
-                        return <img src={process.env.NEXT_PUBLIC_S3_URL + f} className="superpose" style={{zIndex: 10 + index}}/>
-                      })}
-                    </div>
+                <h3 className='text-xs text-lightGray'>
+                  {combinations.main.trait}
+                </h3>
+                <h2 className='text-sm text-colorText'>
+                  {combinations.main.attribute}
+                </h2>
+                <div className='flex justify-between items-center w-full p-2 border-inputColor border-2 rounded-xl'>
+                  {generatePng(traits, combinations, 3).map((e, i) => {
+                    return (
+                      <div
+                        key={`square_${i}`}
+                        className='relative h-28 w-28 rounded-xl bg-lightGrayCube'
+                        style={{ overflow: "hidden" }}
+                      >
+                        {e.map((f, index) => {
+                          return (
+                            <img
+                              src={process.env.NEXT_PUBLIC_S3_URL + f}
+                              className='superpose'
+                              style={{ zIndex: 10 + index }}
+                            />
+                          );
+                        })}
+                      </div>
+                    );
                   })}
                 </div>
                 <ol>
-                  {combinations.rules.map((e,index) => {
-                    return <li key={`list_${index}`}>{e.trait} - {e.attribute}</li>
+                  {combinations.rules.map((e, index) => {
+                    return (
+                      <li key={`list_${index}`}>
+                        {e.trait} - {e.attribute}
+                      </li>
+                    );
                   })}
                 </ol>
               </div>
@@ -255,59 +282,64 @@ export default connect(
                 </h3>
               </div>
             )}
-
           </div>
 
           <div className=' h-[450px] rounded-xl border-2 border-inputColor flex relative'>
-            {checkAddSubRule(combinations) && <button
-              className='absolute w-auto p-2 rounded-full text-sm bg-transparent border-2 border-secondaryColor text-colorText transition-all duration-300 ease-in-out bg-white hover:bg-secondaryColor hover:text-whiteText'
-              style={{ top: -16, right: -14 }}
-              onClick={(event) => addNewRule(event)}
-            >
-              +
-            </button>}
-            
+            {checkAddSubRule(combinations) && (
+              <button
+                className='absolute w-auto p-2 rounded-full text-sm bg-transparent border-2 border-secondaryColor text-colorText transition-all duration-300 ease-in-out bg-white hover:bg-secondaryColor hover:text-whiteText'
+                style={{ top: -16, right: -14 }}
+                onClick={(event) => addNewRule(event)}
+              >
+                +
+              </button>
+            )}
 
             <div className='p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll'>
               {traits?.traits_and_attributes.map((trait, index) => {
-
-                return combinations?.main?.trait === trait.id ? (<div
-                  key={`sub_attribute_${index}`}
-                  style={{cursor: 'not-allowed'}}
-                  className={`${classNameTraitWh} blur-[4px]`}
-                >
-                  <h3>{trait.id}</h3>
-                </div>) : (<div
-                  onClick={(event) => {
-                    manageRule(event, trait, "sub-trait");
-                    clickSubTrait(event, trait);
-                  }}
-                  key={`sub_attribute_${index}`}
-                  className={`${classNameTrait} ${
-                    trait.id ===  combinations?.tmp?.trait && "selectTrait"
-                  }`}
-                >
-                  <h3>{trait.id}</h3>
-                </div>)})}
+                return combinations?.main?.trait === trait.id ? (
+                  <div
+                    key={`sub_attribute_${index}`}
+                    style={{ cursor: "not-allowed" }}
+                    className={`${classNameTraitWh} blur-[4px]`}
+                  >
+                    <h3>{trait.id}</h3>
+                  </div>
+                ) : (
+                  <div
+                    onClick={(event) => {
+                      manageRule(event, trait, "sub-trait");
+                      clickSubTrait(event, trait);
+                    }}
+                    key={`sub_attribute_${index}`}
+                    className={`${classNameTrait} ${
+                      trait.id === combinations?.tmp?.trait && "selectTrait"
+                    }`}
+                  >
+                    <h3>{trait.id}</h3>
+                  </div>
+                );
+              })}
             </div>
 
             {selectedSubTrait !== null && (
               <div className='p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll ml-1 border-l-2 border-secondaryColor border-dotted'>
                 {selectedSubTrait.attributes.map((attribute, index) => {
                   return (
-                  <div
-                  onClick={(event) => {
-                    manageRule(event, attribute, "sub-attribute");
-                  }}
-                    key={`sub_attribute_${index}`}
-                    className={`${classNameTrait} ${
-                      attribute.id === combinations?.tmp?.attribute &&
-                      "selectTrait"
-                    }`}
-                  >
-                    <h3>{attribute.id}</h3>
-                  </div>
-                )})}
+                    <div
+                      onClick={(event) => {
+                        manageRule(event, attribute, "sub-attribute");
+                      }}
+                      key={`sub_attribute_${index}`}
+                      className={`${classNameTrait} ${
+                        attribute.id === combinations?.tmp?.attribute &&
+                        "selectTrait"
+                      }`}
+                    >
+                      <h3>{attribute.id}</h3>
+                    </div>
+                  );
+                })}
               </div>
             )}
 
