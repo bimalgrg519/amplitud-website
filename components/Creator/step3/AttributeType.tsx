@@ -115,7 +115,7 @@ export default connect(
                      console.log(value);
 
                      updateAtributeWeight({
-                       attribute: { ...attribute, weight: ((value as number) / 100.0) },
+                       attribute: { ...attribute, weight: new Number(value) / 100.0 },
                        trait: trait.id,
                      });
                    }}
