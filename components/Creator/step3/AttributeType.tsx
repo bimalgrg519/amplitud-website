@@ -114,7 +114,7 @@ export default connect(
               updateAtributeWeight({
                 attribute: {
                   ...attribute,
-                  onlyone: values.onlyone,
+                  onlyone: (values.onlyone as boolean),
                   weight: (values.weight as number),
                 },
                 trait: trait.id,
