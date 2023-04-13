@@ -4,12 +4,10 @@ import CreatorNav from "@/components/Creator/compos/CreatorNav"
 import SavedRules from "@/components/Creator/step4/SavedRules"
 
 
+export default (() => {
 
-
-export default function applyCombination() {
-
-    return (
-        <div className="lg:px-20 flex items-center justify-center flex-col relative w-screen">
+  return (
+    <div className="lg:px-20 flex items-center justify-center flex-col relative w-screen">
             <div className='w-80 h-44 z-40 rounded-xl flex justify-center items-center bg-slate-900 opacity-100 absolute top-[20%] right-2/6 lg:hidden' >
                 <h1>Please connect via desktop <span className=' ml-4'>🖥</span> </h1>
             </div>
@@ -20,6 +18,6 @@ export default function applyCombination() {
                 <SavedRules />
             </div>
         </div>
-    )
+  )
 
-}
+});
