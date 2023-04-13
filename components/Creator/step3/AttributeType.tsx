@@ -115,7 +115,7 @@ export default connect(
                 attribute: {
                   ...attribute,
                   onlyone: values.onlyone,
-                  weight: values.weight,
+                  weight: (values.weight as number),
                 },
                 trait: trait.id,
               });
