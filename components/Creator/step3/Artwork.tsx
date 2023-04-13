@@ -109,7 +109,7 @@ export default connect(
             <h3>Layer order</h3>
           </Link>
         </div>
-        {isConform && (
+        {true && (
           <div className=' h-20 flex justify-center items-center  '>
             <Link
               className='bg-secondaryColor text-whiteText p-3 flex justify-center items-center border-2 border-secondaryColor text-sm w-32 rounded-full cursor-pointer z-10 '
