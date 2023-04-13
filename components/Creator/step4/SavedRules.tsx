@@ -103,7 +103,7 @@ export default connect(
         <div className=' h-20 flex justify-center items-center  '>
           <Link
             className='bg-secondaryColor text-whiteText p-3 flex justify-center items-center border-2 border-secondaryColor text-sm w-32 rounded-full cursor-pointer z-10 '
-            href='/Artwork/step4'
+            href='/Artwork/index'
           >
             <h3>Next step</h3>
             <svg

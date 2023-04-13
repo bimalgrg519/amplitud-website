@@ -54,53 +54,72 @@ export default connect(
         </m.div>
         <m.h2 className='font-bold w-3/12 text-center'>{attribute.id}</m.h2>
         <m.div
-          className={`relative w-4/12 flex justify-center items-center ${
+          className={`inputAttribute w-20 p-2 text-sm bg-transparent border-2 border-lightGray rounded-3xl ${
+            attribute.onlyone && " blur-[4px]"
+          }`}
+        >
+          <m.input
+            className={`bg-transparent inputPercent px-2  `}
+            placeholder='Enter %'
+            type='number'
+            max={100}
+            step={0.01}
+            min={0}
+            onChange={(e: any) => {
+              const trueValue =
+                e.target.value === "" ? null : e.target.value / 100;
+              const check = checkWeightConfomityAttribute(
+                trait,
+                index,
+                trueValue
+              );
+              if (!check) {
+                setErrorState({
+                  status: true,
+                  message: "The total of all attributes must not exceed 100",
+                });
+
+                updateAtributeWeight({
+                  attribute: { ...attribute, weight: trueValue },
+                  trait: trait.id,
+                });
+              } else {
+                updateAtributeWeight({
+                  attribute: { ...attribute, weight: trueValue },
+                  trait: trait.id,
+                });
+
+                if (e.target.value > 100) {
+                  setErrorState({
+                    status: true,
+                    message: "The percent need to maximum 100%",
+                  });
+                }
+              }
+            }}
+            value={displayWeight}
+          />
+
+          {displayWeight !== null && <m.div className='suffix'>%</m.div>}
+        </m.div>
+        <m.div
+          className={`relative w-4/12 px-2 py-0 flex justify-center items-center ${
             attribute.onlyone && " blur-[2px]"
           }`}
         >
-          <m.div className='relative flex items-center h-10 py-2 px-2 rounded-xl border-2 border-lightGray overflow-hidden'>
-            <m.div
-              className={`w-full h-full opacity-0 absolute top-0 left-0 ${
-                attribute.onlyone ? "z-10" : "-z-10"
-              }`}
-            />
-            {Array(10)
-              .fill(0)
-              .map((_, i) => {
-                const id = i + 1;
-                const isActive = isActivePercent(id, displayWeight);
-                return (
-                  <m.div
-                    onClick={(e) => {
-                      const trueValue = id / 10;
-                      const check = checkWeightConfomityAttribute(
-                        trait,
-                        index,
-                        trueValue
-                      );
+          <m.div className='relative w-full flex items-center h-10 py-2 rounded-xl border-2 border-lightGray overflow-hidden'>
+            <input type="range"
+                   value={displayWeight}
+                   onChange={(e) => {
+                     const { value } = e.target;
+                     console.log(value);
 
-                      if (!check) {
-                        setErrorState({
-                          status: true,
-                          message:
-                            "The total of all attributes must not exceed 100",
-                        });
-                      } else {
-                        getPercents(e);
-                        updateAtributeWeight({
-                          attribute: { ...attribute, weight: trueValue },
-                          trait: trait.id,
-                        });
-                      }
-                    }}
-                    id={`${id}`}
-                    key={`attributePercent_${i + 1}`}
-                    className={`w-4 h-4 cursor-pointer rounded-full bg-lightGray mx-0.5 likelihoodRounded ${
-                      isActive && "active"
-                    }`}
-                  />
-                );
-              })}
+                     updateAtributeWeight({
+                       attribute: { ...attribute, weight: value / 100 },
+                       trait: trait.id,
+                     });
+                   }}
+                   className="w-full h-1 w-230 bg-indigo-100 rounded-lg appearance-none cursor-pointer dark:bg-indigo-100" />
           </m.div>
         </m.div>
 
@@ -120,7 +139,7 @@ export default connect(
                 trait: trait.id,
               });
             }}
-            className={`w-16  mr-2 border-2 text-colorText border-secondaryColor text-sm rounded-full transition-all duration-300 
+            className={`w-16  mr-8 border-2 text-colorText border-secondaryColor text-sm rounded-full transition-all duration-300 
           hover:bg-secondaryColor hover:text-whiteText ${
             attribute.onlyone && "active"
           }`}
@@ -128,63 +147,11 @@ export default connect(
             Only 1
           </m.button>
 
-          <m.div
-            className={`inputAttribute w-20 p-2 text-sm mr-2 bg-transparent border-2 border-lightGray rounded-3xl ${
+          <div
+            className={`w-20 p-2 text-sm mr-2 bg-transparent text-center ${
               attribute.onlyone && " blur-[4px]"
             }`}
-          >
-            <m.input
-              className={`bg-transparent inputPercent`}
-              placeholder='Enter %'
-              type='number'
-              max={100}
-              step={0.01}
-              min={0}
-              onChange={(e: any) => {
-                const trueValue =
-                  e.target.value === "" ? null : e.target.value / 100;
-                const check = checkWeightConfomityAttribute(
-                  trait,
-                  index,
-                  trueValue
-                );
-                if (!check) {
-                  setErrorState({
-                    status: true,
-                    message: "The total of all attributes must not exceed 100",
-                  });
-
-                  updateAtributeWeight({
-                    attribute: { ...attribute, weight: trueValue },
-                    trait: trait.id,
-                  });
-                } else {
-                  updateAtributeWeight({
-                    attribute: { ...attribute, weight: trueValue },
-                    trait: trait.id,
-                  });
-
-                  if (e.target.value > 100) {
-                    setErrorState({
-                      status: true,
-                      message: "The percent need to maximum 100%",
-                    });
-                  }
-                }
-              }}
-              value={displayWeight}
-            />
-
-            {displayWeight !== null && <m.div className='suffix'>%</m.div>}
-          </m.div>
-
-          <m.input
-            className={`w-20 p-2 text-sm mr-2 bg-transparent border-2 border-lightGray rounded-3xl ${
-              attribute.onlyone && " blur-[4px]"
-            }`}
-            placeholder='0'
-            type='text'
-          />
+          >0</div>
         </m.div>
       </m.div>
     );

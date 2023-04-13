@@ -164,7 +164,7 @@ export default connect(
           )}
 
           <div className=' h-[450px] rounded-xl border-2 border-inputColor flex '>
-            <div className='p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll'>
+            <div className='p-2 px-4 h-full flex flex-col justify-start items-start overflow-x-hidden text-colorText'>
               {traits?.traits_and_attributes.map((trait, index) => (
                 <div
                   onClick={(event) => {
@@ -208,7 +208,8 @@ export default connect(
               </div>
             )}
           </div>
-          <div className='w-96   flex flex-col justify-center items-center'>
+
+          <div className='w-96 flex flex-col justify-center items-center'>
             <h2 className='text-sm text-colorText'>Select Type Of Rule</h2>
             <div className='w-full flex justify-around mt-2'>
               <button
@@ -295,7 +296,7 @@ export default connect(
               </button>
             )}
 
-            <div className='p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll'>
+            <div className='p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-x-hidden overflow-y-scroll'>
               {traits?.traits_and_attributes.map((trait, index) => {
                 return combinations?.main?.trait === trait.id ? (
                   <div
@@ -323,7 +324,7 @@ export default connect(
             </div>
 
             {selectedSubTrait !== null && (
-              <div className='p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-y-scroll ml-1 border-l-2 border-secondaryColor border-dotted'>
+              <div className='p-2 px-4 h-full flex flex-col justify-start items-start text-colorText overflow-x-hidden overflow-y-scroll ml-1 border-l-2 border-secondaryColor border-dotted'>
                 {selectedSubTrait.attributes.map((attribute, index) => {
                   return (
                     <div
@@ -344,7 +345,7 @@ export default connect(
             )}
 
             {selectedSubTrait === null && (
-              <div className='p-2 px-4 h-full flex flex-col justify-center items-center text-colorText overflow-y-scroll ml-1 border-l-2 border-secondaryColor border-dotted'>
+              <div className='p-2 px-4 h-full flex flex-col justify-center items-center text-colorText overflow-x-hidden overflow-y-scroll ml-1 border-l-2 border-secondaryColor border-dotted'>
                 <span style={{ maxWidth: 160, textAlign: "center" }}>
                   Please select a Sub Trait
                 </span>
