@@ -36,7 +36,7 @@ body {
 body {
   min-width: 100vw;
   overflow-x: hidden;
-  background: var(--primaryColor);
+  background: #fff;
 }
 
 /*GLOBAL FONTS SETTINGS*/
@@ -185,3 +185,4 @@ button.active {
 .inputAttribute:focus-within {
   border: 2px solid #6442ff;
 }
+

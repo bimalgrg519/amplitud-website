@@ -1,12 +1,11 @@
-import { Provider } from 'react-redux';
-import { wrapper } from '@/store';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-import '@/styles/globals.scss';
-import { injectStore } from '@/store/axios'
+import { Provider } from "react-redux";
+import { wrapper } from "@/store";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import "@/styles/globals.scss";
+import { injectStore } from "@/store/axios";
 
 export default function App({ Component, ...rest }) {
-
   const { store, props } = wrapper.useWrappedStore(rest);
   const { pageProps } = props;
 
