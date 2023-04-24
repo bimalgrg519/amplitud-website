@@ -13,9 +13,12 @@ export default function App({ Component, ...rest }) {
 
   return (
     <Provider store={store}>
-      <Nav />
-      {/* <Component {...pageProps} />
-      <Footer /> */}
+      <div className="flex flex-col h-screen justify-between">
+        <Nav />
+        <h1>hello world</h1>
+        {/* <Component {...pageProps} /> */}
+        <Footer />
+      </div>
     </Provider>
   );
 }
