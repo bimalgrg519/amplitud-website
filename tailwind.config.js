@@ -48,7 +48,6 @@ module.exports = {
         yellowButton: "rgba(194, 133, 53, 0.25)",
         clearYellowButton: "rgba(255, 166, 50, 0.25)",
         alertBoxBg: "rgba(255, 255, 255, 0.35)",
-
       },
       screens: {
         '2xlarge': { 'max': '1535px' },
